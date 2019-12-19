@@ -17,8 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_colourTimer = new QTimer();
     connect(m_colourTimer, SIGNAL(timeout()), this, SLOT(bg()));
-    m_colourTimer->setInterval(1);
-    m_colourTimer->start();
+    m_colourTimer->setSingleShot(true);
+    m_colourTimer->start(10);
 }
 
 MainWindow::~MainWindow()
@@ -41,4 +41,6 @@ void MainWindow::bg()
     }
     pal.setColor(QPalette::Background, QColor(r, g, b));
     ui->centralWidget->setPalette(pal);
+    repaint();
+    m_colourTimer->start(10);
 }
